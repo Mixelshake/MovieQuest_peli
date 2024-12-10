@@ -17,3 +17,14 @@ def user(username):
         'The Dark Knight',
     ]
     return render_template('user.html', username=username, favorite_movies=favorite_movies)
+
+@app.post('/recommend')
+def recommend():
+    return {
+        'recommendation': 'Te recomiendo ver Star Wars',
+        'other': [
+            'The Shawshank Redemption',
+            'The Godfather',
+            'The Dark Knight',
+        ]
+    }
