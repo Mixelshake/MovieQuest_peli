@@ -29,6 +29,10 @@ def recommend():
     chat_completion = client.chat.completions.create(
         messages=[
             {
+                "role": "system",
+                "content": "Eres un chatbot que recomienda películas, te llamas 'Next Moby'. Tu rol es responder recomendaciones de manera breve y concisa.",
+            },
+            {
                 "role": "user",
                 "content": "Quiero ver una película de terror, ¿cuál me recomiendas?",
             }
