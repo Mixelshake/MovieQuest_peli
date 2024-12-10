@@ -4,7 +4,19 @@ Este es el proyecto que desarrollamos en clase para el **Taller de desarrollo de
 
 Si quieres partir de cero, te recomiendo comenzar con el [proyecto base](https://github.com/DIAG-TALLER-2024/base).
 
-## Instrucciones de instalación
+## ¿Qué es lo que construiremos?
+
+**Next Muby**, una aplicación web donde puedes obtener recomendaciones de películas.
+
+Stack tecnológico:
+
+- [Flask](https://flask.palletsprojects.com/en/stable/) para la aplicación web.
+- [Boostrap](https://getbootstrap.com/) como librería de componentes (con [Bootstrap Flask](https://bootstrap-flask.readthedocs.io/en/stable/)).
+- [OpenAI API](https://platform.openai.com/) para la interacción con las personas que usan la aplicación.
+
+## Instrucciones
+
+### Instalación
 
 Una vez descargado el proyecto, crear Virtual environment:
 
@@ -24,7 +36,7 @@ Instalar dependencias:
 pip install -r requirements.txt
 ```
 
-## Ejecución
+### Ejecución
 
 Una vez ya lo instalaste, recuerda activar el Virtual Env:
 
@@ -39,7 +51,7 @@ Y luego ya puedes ejecutar el proyecto localmente con
 flask run --debug
 ```
 
-## Agregar a tu propio GitHub
+### Agregar a tu propio GitHub
 
 Si descargaste el proyecto con `git clone`, para agregarlo a tu propio repositorio tienes que hacer lo siguiente:
 
