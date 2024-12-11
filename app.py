@@ -14,6 +14,33 @@ def index():
     return render_template('landing.html')
 
 
+@app.route('/chat', methods=['GET', 'POST'])
+def chat():
+    if request.method == 'GET':
+        return render_template('chat.html')
+
+    intent = request.form.get('intent')
+
+    if intent == 'Quiero tener suerte':
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": "Eres un chatbot que recomienda películas, te llamas 'Next Moby'. Tu rol es responder recomendaciones de manera breve y concisa.",
+                },
+                {
+                    "role": "user",
+                    "content": "Recomiéndame una película",
+                }
+            ],
+            model="gpt-4o",
+            temperature=1
+        )
+
+        model_recommendation = chat_completion.choices[0].message.content
+        return render_template('chat.html', recommendation=model_recommendation)
+
+
 @app.route('/user/<username>')
 def user(username):
     favorite_movies = [
