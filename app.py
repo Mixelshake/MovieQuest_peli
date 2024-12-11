@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap5
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -26,6 +26,9 @@ def user(username):
 
 @app.post('/recommend')
 def recommend():
+    data = request.get_json()
+    user_message = data['message']
+
     chat_completion = client.chat.completions.create(
         messages=[
             {
@@ -34,7 +37,7 @@ def recommend():
             },
             {
                 "role": "user",
-                "content": "Quiero ver una película de terror, ¿cuál me recomiendas?",
+                "content": user_message,
             }
         ],
         model="gpt-4o",
