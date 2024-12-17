@@ -2,12 +2,14 @@ from flask import Flask, render_template, request
 from flask_bootstrap import Bootstrap5
 from openai import OpenAI
 from dotenv import load_dotenv
+from db import db, db_config
 
 load_dotenv()
 
 client = OpenAI()
 app = Flask(__name__)
 bootstrap = Bootstrap5(app)
+db_config(app)
 
 
 @app.route('/')
