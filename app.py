@@ -18,7 +18,7 @@ def index():
 messages = [
     {
         "role": "system",
-        "content": "Eres un chatbot que recomienda películas, te llamas 'Next Moby'. Tu rol es responder recomendaciones de manera breve y concisa.",
+        "content": "Eres un chatbot que recomienda películas, te llamas 'Next Moby'. Tu rol es responder recomendaciones de manera breve y concisa. No repitas recomendaciones.",
     }
 ]
 
@@ -30,10 +30,19 @@ def chat():
 
     intent = request.form.get('intent')
 
-    if intent == 'Quiero tener suerte':
+    intents = {
+        'Quiero tener suerte': 'Recomiéndame una película',
+        'Terror': 'Recomiéndame una película de terror',
+        'Acción': 'Recomiéndame una película de acción',
+        'Comedia': 'Recomiéndame una película de comedia',
+    }
+
+    if intent in intents:
+        user_message = intents[intent]
+
         messages.append({
             "role": "user",
-            "content": "Recomiéndame una película (que no me hayas recomendado!)",
+            "content": user_message,
         })
 
         chat_completion = client.chat.completions.create(
@@ -43,6 +52,11 @@ def chat():
         )
 
         model_recommendation = chat_completion.choices[0].message.content
+        messages.append({
+            "role": "assistant",
+            "content": model_recommendation,
+        })
+
         return render_template('chat.html', recommendation=model_recommendation)
 
 
