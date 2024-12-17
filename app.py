@@ -33,7 +33,7 @@ def chat():
     if intent == 'Quiero tener suerte':
         messages.append({
             "role": "user",
-            "content": "Recomiéndame una película",
+            "content": "Recomiéndame una película (que no me hayas recomendado!)",
         })
 
         chat_completion = client.chat.completions.create(
