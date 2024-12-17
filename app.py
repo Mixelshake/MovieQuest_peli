@@ -33,6 +33,7 @@ def chat():
         'Terror': 'Recomiéndame una película de terror',
         'Acción': 'Recomiéndame una película de acción',
         'Comedia': 'Recomiéndame una película de comedia',
+        'Enviar': request.form.get('message')
     }
 
     if intent in intents:
