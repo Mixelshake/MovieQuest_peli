@@ -9,9 +9,18 @@ client = OpenAI()
 app = Flask(__name__)
 bootstrap = Bootstrap5(app)
 
+
 @app.route('/')
 def index():
     return render_template('landing.html')
+
+
+messages = [
+    {
+        "role": "system",
+        "content": "Eres un chatbot que recomienda películas, te llamas 'Next Moby'. Tu rol es responder recomendaciones de manera breve y concisa.",
+    }
+]
 
 
 @app.route('/chat', methods=['GET', 'POST'])
@@ -22,17 +31,13 @@ def chat():
     intent = request.form.get('intent')
 
     if intent == 'Quiero tener suerte':
+        messages.append({
+            "role": "user",
+            "content": "Recomiéndame una película",
+        })
+
         chat_completion = client.chat.completions.create(
-            messages=[
-                {
-                    "role": "system",
-                    "content": "Eres un chatbot que recomienda películas, te llamas 'Next Moby'. Tu rol es responder recomendaciones de manera breve y concisa.",
-                },
-                {
-                    "role": "user",
-                    "content": "Recomiéndame una película",
-                }
-            ],
+            messages=messages,
             model="gpt-4o",
             temperature=1
         )
@@ -55,18 +60,13 @@ def user(username):
 def recommend():
     data = request.get_json()
     user_message = data['message']
+    messages.append({
+        "role": "user",
+        "content": user_message,
+    })
 
     chat_completion = client.chat.completions.create(
-        messages=[
-            {
-                "role": "system",
-                "content": "Eres un chatbot que recomienda películas, te llamas 'Next Moby'. Tu rol es responder recomendaciones de manera breve y concisa.",
-            },
-            {
-                "role": "user",
-                "content": user_message,
-            }
-        ],
+        messages=messages,
         model="gpt-4o",
     )
 
