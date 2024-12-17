@@ -14,8 +14,10 @@
         <input type="submit" name="intent" value="Comedia" class="btn btn-secondary" />
     </form>
 
-    {% if recommendation %}
-        <h2>Recomendación</h2>
-        <p>{{ recommendation }}</p>
-    {% endif %}
+    <ul>
+        {% for message in messages %}
+            <li>{{ message.content }} ({{message.author}})</li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}
