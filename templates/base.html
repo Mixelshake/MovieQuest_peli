@@ -1,26 +1,29 @@
 <!doctype html>
-<html lang="es" data-bs-theme="dark">
+<html lang="es" data-bs-theme="dark"> <!-- Define el idioma de la página como español y configura el tema de Bootstrap como oscuro -->
     <head>
-        {% block head %}
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        {% block head %} <!-- Sección de plantilla que puede ser sobrescrita por otras páginas -->
 
-        {% block styles %}
-            <!-- Bootstrap CSS -->
-            {{ bootstrap.load_css() }}
+        <!-- Required meta tags: Metaetiquetas necesarias para la correcta visualización y funcionamiento -->
+        <meta charset="utf-8"> <!-- Define la codificación de caracteres como UTF-8 para soportar caracteres especiales -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <!-- Configura la vista para dispositivos móviles para una visualización responsiva -->
+
+        {% block styles %} <!-- Bloque de estilo que puede ser sobrescrito -->
+            <!-- Bootstrap CSS: Carga el archivo CSS de Bootstrap para aplicar el diseño predeterminado -->
+            {{ bootstrap.load_css() }} <!-- Llama a la función para cargar el archivo CSS de Bootstrap -->
         {% endblock %}
 
-        <title>{% block title %}Next Muby{% endblock %}</title>
+        <title>{% block title %}Next Muby{% endblock %}</title> <!-- Título de la página, que puede ser sobrescrito en otras páginas -->
+
         {% endblock %}
     </head>
     <body>
         <!-- Your page content -->
-        {% block content %}{% endblock %}
+        {% block content %}{% endblock %} <!-- Bloque de contenido donde se colocará el contenido principal de la página -->
 
-        {% block scripts %}
-            <!-- Optional JavaScript -->
-            {{ bootstrap.load_js() }}
+        {% block scripts %} <!-- Bloque para scripts adicionales que puede ser sobrescrito -->
+            <!-- Optional JavaScript: Carga los archivos JavaScript necesarios para la página -->
+            {{ bootstrap.load_js() }} <!-- Llama a la función para cargar el archivo JS de Bootstrap -->
         {% endblock %}
     </body>
 </html>
+

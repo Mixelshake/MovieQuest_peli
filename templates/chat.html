@@ -1,34 +1,107 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Next Muby (BETA)
+    PeliQuest (BETA)
 {% endblock %}
 
 {% block content %}
-    <div class="container col-xxl-8 px-4 py-5">
-        {% for message in messages %}
-            {% if message.author == 'assistant' %}
-                <div class="d-flex flex-row justify-content-start mb-4">
-                    <img class="bg-white" src="{{ url_for('static', filename='muby.png') }}" alt="avatar 1" style="width: 45px; height: 100%;">
-                    <div class="p-3 ms-3" style="border-radius: 15px; background-color: rgba(57, 192, 237,.2);">
-                        <p class="small mb-0">{{message.content}}</p>
-                    </div>
-                </div>
-            {% else %}
-                <div class="d-flex flex-row justify-content-end mb-4">
-                    <div class="p-3 me-3 border bg-body-tertiary" style="border-radius: 15px;">
-                        <p class="small mb-0">{{message.content}}</p>
-                    </div>
-              </div>
-            {% endif %}
-        {% endfor %}
+<style>
+/* Animación flotante */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-14px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
 
-       <form method="POST">
-            <div class="input-group mb-3">
-                <input name="message" required="required" class="form-control" placeholder="Enviar mensaje a Muby" aria-label="Tu mensaje" aria-describedby="send-message"/>
-                <input type="submit" class="btn btn-primary" id="send-message" name="intent" value="Enviar"/>
+/* Estilo global para el fondo */
+body {
+    background-color: #b59a7d;
+    margin: 0;
+    height: 100vh; /* Hace que el body ocupe toda la altura de la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Estilo del título */
+.title {
+    font-family: 'Cinematica', sans-serif; /* Fuente especial como en el segundo código */
+    font-size: 48px;
+    font-weight: bold;
+    color: #1d242e;
+    margin-top: 20px;  /* Para que esté más cerca del margen superior */
+    text-align: center;
+}
+
+/* Estilo de los mensajes */
+.message-assistant {
+    background-color: #1d242e;
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.message-user {
+    background-color: #fef9e3; /* Fondo para los mensajes del usuario */
+    color: #1d242e; /* Texto oscuro para los mensajes del usuario */
+    border-radius: 15px;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilo del formulario de mensaje */
+.input-group {
+    width: 100%;
+    max-width: 2000px; /* Controla el ancho del input y el botón */
+}
+
+/* Estilo de los botones */
+.btn-primary {
+    background-color: #1d242e; /* Color de fondo para el botón */
+    color: #fef9e3;
+    border-radius: 25px;
+    padding: 12px 24px;
+}
+
+</style>
+
+<!-- Título en fuente especial -->
+<div class="title">
+    PeliQuest (BETA)
+</div>
+
+<div class="container col-xxl-8 px-4 py-5">
+    {% for message in messages %}
+        {% if message.author == 'assistant' %}
+            <div class="d-flex flex-row justify-content-start mb-4">
+                <img src="{{ url_for('static', filename='pixelart_logo.png') }}" alt="avatar 1" style="width: 80px; height: 100%;">
+                <div class="p-3 ms-3 message-assistant">
+                    <p class="small mb-0">{{message.content}}</p>
+                </div>
             </div>
-        </form>
-    </div>
+        {% else %}
+            <div class="d-flex flex-row justify-content-end mb-4">
+                <div class="p-3 me-3 message-user">
+                    <p class="small mb-0">{{message.content}}</p>
+                </div>
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    <form method="POST">
+        <div class="input-group mb-3">
+            <input name="message" required="required" class="form-control" placeholder="Enviar mensaje a PeliQuest" aria-label="Tu mensaje" aria-describedby="send-message"/>
+            <input type="submit" class="btn btn-primary" id="send-message" name="intent" value="Enviar"/>
+        </div>
+    </form>
+</div>
 
 {% endblock %}
+
